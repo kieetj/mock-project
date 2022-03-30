@@ -1,0 +1,51 @@
+.root {
+  margin-top: 5rem;
+  display: flex;
+  justify-content: center;
+  .p-float-label {
+    margin-bottom: 1.8rem;
+  }
+  &__form-layout {
+    width: 35%;
+    padding: 3rem;
+    border-radius: 5px;
+    -webkit-box-shadow: 5px 2px 15px -1px #9b9b9b;
+    box-shadow: 5px 2px 15px -1px #9b9b9b;
+  }
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.fullWidthInput {
+  width: 100% !important;
+}
+
+input {
+  width: 100%;
+}
+
+:host {
+  ::ng-deep .p-dropdown {
+    width: 100%;
+    margin: 0.6rem 0 0.6rem 0;
+  }
+  .p-inputtext,
+  p-inputNumber {
+    margin: 0.5rem 0 0.5rem 0;
+  }
+}
+code {
+  color: red;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}

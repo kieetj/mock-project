@@ -1,0 +1,212 @@
+<h2>Creating new user</h2>
+<div class="root">
+  <div class="root__form-layout">
+    <form (ngSubmit)="onSubmit()" [formGroup]="registerForm">
+      <div class="grid">
+        <div class="col-12 md:col-6">
+          <label for="name">Name<code>*</code> </label>
+          <input
+            id="name"
+            type="text"
+            pInputText
+            placeholder="Ex: Bill"
+            name="name"
+            formControlName="name"
+          />
+          <code
+            *ngIf="
+              getControlName('name')?.invalid && getControlName('name')?.touched
+            "
+          >
+            <span *ngIf="getControlName('name')?.errors?.['required']"
+              >Name is required</span
+            >
+            <span *ngIf="getControlName('name')?.errors?.['pattern']"
+              >Name is invalid</span
+            >
+          </code>
+        </div>
+
+        <div class="col-12 md:col-6 mb-1">
+          <label for="age">Age<code>*</code></label>
+          <div>
+            <input
+              (keyup)="showAddress($event)"
+              class="fullWidthInput"
+              id="age"
+              type="number"
+              pInputText
+              placeholder="age"
+              name="age"
+              min="10"
+              max="88"
+              formControlName="age"
+            />
+          </div>
+          <code
+            *ngIf="
+              getControlName('age')?.invalid && getControlName('age')?.touched
+            "
+          >
+            <span *ngIf="getControlName('age')?.errors?.['required']"
+              >Age is required</span
+            >
+            <span *ngIf="getControlName('age')?.errors?.['pattern']"
+              >Age must from 10 to 80</span
+            >
+          </code>
+        </div>
+      </div>
+      <div>
+        <label for="mail">Mail<code>*</code></label>
+        <input
+          class="fullWidthInput"
+          id="mail"
+          type="text"
+          pInputText
+          placeholder="Ex: abc@gmail.com"
+          name="mail"
+          formControlName="mail"
+        />
+        <code
+          *ngIf="
+            getControlName('mail')?.invalid && getControlName('mail')?.touched
+          "
+        >
+          <span *ngIf="getControlName('mail')?.errors?.['required']"
+            >Email is required</span
+          >
+          <span *ngIf="getControlName('mail')?.errors?.['pattern']"
+            >Email is invalid</span
+          >
+        </code>
+      </div>
+      <ng-container *ngIf="showInputAddress">
+        <label for="address">Address<code>*</code></label>
+        <input
+          class="fullWidthInput"
+          id="address"
+          type="text"
+          pInputText
+          placeholder="Ex: Quan 9, TPHCM"
+          name="address"
+          formControlName="address"
+        />
+        <code
+          *ngIf="
+            getControlName('address')?.invalid &&
+            getControlName('address')?.touched
+          "
+        >
+          <span *ngIf="getControlName('address')?.errors?.['required']"
+            >Address is required</span
+          >
+        </code>
+      </ng-container>
+
+      <div class="grid">
+        <div class="col-12 md:col-6">
+          <label for="phone">Phone<code>*</code></label>
+          <input
+            id="phone"
+            type="number"
+            pInputText
+            name="phone"
+            formControlName="phone"
+            placeholder="Ex: 0988898989"
+          />
+          <code
+            *ngIf="
+              getControlName('phone')?.invalid &&
+              getControlName('phone')?.touched
+            "
+          >
+            <span *ngIf="getControlName('phone')?.errors?.['required']"
+              >Phone is required</span
+            >
+            <span *ngIf="getControlName('phone')?.errors?.['pattern']"
+              >Phone must has 10 numbers</span
+            >
+          </code>
+        </div>
+
+        <div class="col-12 md:col-6">
+          <label for="zipcode">Zipcode<code>*</code></label>
+          <p-dropdown
+            id="zipcode"
+            [options]="zipCodes"
+            [(ngModel)]="selectedZipCode"
+            placeholder="Select a ZipCode"
+            optionLabel="code"
+            optionValue="code"
+            [showClear]="true"
+            name="zipcode"
+            formControlName="zipcode"
+          >
+          </p-dropdown>
+          <code
+            *ngIf="
+              getControlName('zipcode')?.invalid &&
+              getControlName('zipcode')?.touched
+            "
+          >
+            <span *ngIf="getControlName('zipcode')?.errors?.['required']"
+              >Zipcode is required</span
+            >
+          </code>
+        </div>
+      </div>
+
+      <label for="companyGroup">Company Group<code>*</code></label>
+      <p-dropdown
+        id="companyGroup"
+        [options]="companyGroup"
+        [(ngModel)]="selectedCompanyGroup"
+        placeholder="Select a Company Group"
+        optionLabel="code"
+        optionValue="code"
+        [showClear]="true"
+        name="companyGroup"
+        formControlName="companyGroup"
+      ></p-dropdown>
+      <code
+        *ngIf="
+          getControlName('companyGroup')?.invalid &&
+          getControlName('companyGroup')?.touched
+        "
+      >
+        <span *ngIf="getControlName('companyGroup')?.errors?.['required']"
+          >Zipcode is required</span
+        >
+      </code>
+
+      <div class="grid flex justify-content-center mt-3">
+        <div class="col-12 md:col-3">
+          <button
+            type="submit"
+            pButton
+            pRipple
+            label="Save"
+            icon="pi pi-check"
+            [disabled]="registerForm.invalid || submitted"
+          ></button>
+        </div>
+        <div class="col-12 md:col-3">
+          <button
+            type="button"
+            (click)="confirm($event)"
+            pButton
+            pRipple
+            label="Cancel"
+            icon="pi pi-times"
+            class="p-button-text p-button-danger"
+          ></button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<p-toast></p-toast>
+
+<p-confirmDialog> </p-confirmDialog>

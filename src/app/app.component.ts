@@ -3,8 +3,17 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'angular-flex-layout';
+  title = 'mock-project';
+  collapseSideBar = false;
+
+  closeSideBar() {
+    this.collapseSideBar = true;
+  }
+
+  openSideBar() {
+    this.collapseSideBar = false;
+  }
 }

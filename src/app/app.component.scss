@@ -1,0 +1,64 @@
+@mixin height100vh {
+  height: 100vh;
+}
+
+@mixin styleTitleSideBar {
+  padding: 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+@mixin styleIcon {
+  font-size: 25px;
+  padding-right: 1rem;
+}
+
+.root {
+  display: flex;
+
+  &__left {
+    position: relative;
+    background-color: #3b82f6;
+    // width: 15%;
+    transition: width 0.5s;
+
+    @include height100vh();
+    &-logo {
+      width: 55px;
+      height: auto;
+    }
+    &-chart,
+    &-table {
+      @include styleTitleSideBar();
+    }
+    .pi-chart-bar,
+    .pi-table {
+      @include styleIcon();
+    }
+    &-collapseBtn {
+      cursor: pointer;
+    }
+  }
+  &__right {
+    background-color: #f8f9fa;
+    width: 100%;
+    @include height100vh();
+    padding: 1.5rem;
+  }
+}
+
+.active_link {
+  background-color: rgb(0, 0, 0);
+}
+
+.pi-arrow-circle-left,
+.pi-arrow-circle-right {
+  font-size: 2.5rem;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}

@@ -1,9 +1,12 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": false
+  },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular-flex-layout": {
+    "mock-project": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -20,18 +23,20 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/angular-flex-layout",
+            "outputPath": "dist/mock-project",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
-              "src/styles.scss"
+              "src/assets/scss/styles.scss",
+              "node_modules/primeicons/primeicons.css",
+              "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
+              "node_modules/primeng/resources/primeng.css",
+              "node_modules/primeflex/primeflex.css",
+              "node_modules/c3/c3.min.css"
             ],
             "scripts": []
           },
@@ -72,10 +77,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "angular-flex-layout:build:production"
+              "browserTarget": "mock-project:build:production"
             },
             "development": {
-              "browserTarget": "angular-flex-layout:build:development"
+              "browserTarget": "mock-project:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -83,7 +88,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "angular-flex-layout:build"
+            "browserTarget": "mock-project:build"
           }
         },
         "test": {
@@ -94,12 +99,14 @@
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "inlineStyleLanguage": "scss",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
-              "src/styles.scss"
+              "src/assets/scss/styles.scss",
+              "node_modules/primeicons/primeicons.css",
+              "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
+              "node_modules/primeng/resources/primeng.css",
+              "node_modules/primeflex/primeflex.css",
+              "node_modules/c3/c3.min.css"
             ],
             "scripts": []
           }
@@ -107,5 +114,5 @@
       }
     }
   },
-  "defaultProject": "angular-flex-layout"
+  "defaultProject": "mock-project"
 }

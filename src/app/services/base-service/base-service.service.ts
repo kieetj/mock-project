@@ -1,23 +1,22 @@
 import { userData } from 'src/app/shared/models/user.model';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment as evn } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BaseService {
   constructor(protected _http: HttpClient) {}
-
+  BASE_URL = 'https://623aba41b5292b8bfcb8db9d.mockapi.io';
   get<T>(endUrl: string) {
-    return this._http.get<T>(`${evn.BASE_URL}/${endUrl}`);
+    return this._http.get<T>(`${this.BASE_URL}/${endUrl}`);
   }
 
   getParamsSearch<T>(endUrl: string, search: string) {
     let params = new HttpParams();
     params = params.append('search', search);
 
-    return this._http.get<T>(`${evn.BASE_URL}/${endUrl}`, { params: params });
+    return this._http.get<T>(`${this.BASE_URL}/${endUrl}`, { params: params });
   }
 
   getMultiParams<T>(endUrl: string, paramsObj: { page: any; limit: any }) {
@@ -26,13 +25,13 @@ export class BaseService {
     params = params.append('page', paramsObj.page);
     params = params.append('limit', paramsObj.limit);
 
-    return this._http.get<T>(`${evn.BASE_URL}/${endUrl}`, { params: params });
+    return this._http.get<T>(`${this.BASE_URL}/${endUrl}`, { params: params });
   }
 
   getDataParamAge<T>(endUrl: string, age: any) {
     let params = new HttpParams();
     params = params.append('age', age);
-    return this._http.get<T>(`${evn.BASE_URL}/${endUrl}`, { params: params });
+    return this._http.get<T>(`${this.BASE_URL}/${endUrl}`, { params: params });
   }
 
   getCompanyGroupAPI<T>(endUrl: string) {
@@ -41,12 +40,12 @@ export class BaseService {
     );
   }
   post<T>(endUrl: string, bodyData: userData) {
-    return this._http.post<T>(`${evn.BASE_URL}/${endUrl}`, bodyData);
+    return this._http.post<T>(`${this.BASE_URL}/${endUrl}`, bodyData);
   }
   put<T>(endUrl: string, bodyData: {}) {
-    return this._http.put<T>(`${evn.BASE_URL}/${endUrl}`, bodyData);
+    return this._http.put<T>(`${this.BASE_URL}/${endUrl}`, bodyData);
   }
   delete(endUrl: string) {
-    return this._http.delete(`${evn.BASE_URL}/${endUrl}`);
+    return this._http.delete(`${this.BASE_URL}/${endUrl}`);
   }
 }

@@ -43,9 +43,12 @@ export class TableComponent implements OnInit, AfterViewInit {
 
   isLoading = false;
 
+  valueGlobalSearch = '';
+
   @ViewChild('dt1') dt1!: Table;
   @ViewChild('input', { static: true }) input!: ElementRef;
   @ViewChild('globalSearch', { static: true }) globalSearch: any;
+  @ViewChild('nameSearch', { static: true }) nameSearch: any;
 
   constructor(
     private _dataRequest: DataRequestService,
@@ -78,11 +81,21 @@ export class TableComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    fromEvent(this.globalSearch.nativeElement, 'keyup')
+    this.eventGlobalSearch();
+
+    // this.fieldSearch(
+    //   this.globalSearch.nativeElement,
+    //   this.filterGlobalSearch(),
+    //   'seach'
+    // );
+  }
+
+  eventGlobalSearch() {
+    return fromEvent(this.globalSearch.nativeElement, 'keyup')
       .pipe(debounceTime(1000), distinctUntilChanged())
       .subscribe(() => {
         const searchValue = this.globalSearch.nativeElement.value;
-
+        this.valueGlobalSearch = searchValue;
         this._router.navigate(['.'], {
           relativeTo: this._activatedRoute,
           queryParams: { search: searchValue },
@@ -92,12 +105,6 @@ export class TableComponent implements OnInit, AfterViewInit {
           this.filterGlobalSearch();
         }, 500);
       });
-
-    // this.fieldSearch(
-    //   this.globalSearch.nativeElement,
-    //   this.filterGlobalSearch(),
-    //   'seach'
-    // );
   }
 
   getUsers() {

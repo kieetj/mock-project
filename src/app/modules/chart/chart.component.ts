@@ -48,17 +48,11 @@ export class ChartComponent implements OnInit, AfterViewInit {
 
       result = result.sort((a: any, b: any) => b.age - a.age);
 
-      this.totalAge = result;
-
-      this.totalAge?.forEach((element: any) => {
+      result.forEach((element: any) => {
         this.dataAge.push(element.age);
         this.dataTotal.push(element.total);
       });
-    });
-  }
 
-  ngAfterViewInit() {
-    setTimeout(() => {
       const chart = c3.generate({
         bindto: '#chart',
         padding: {
@@ -72,7 +66,7 @@ export class ChartComponent implements OnInit, AfterViewInit {
           ],
           onclick: (data: any) => {
             const { index } = data;
-            const { age } = this.totalAge[index];
+            const { age } = result[index];
             this._router.navigate(['users'], {
               queryParams: { age: age },
             });
@@ -90,13 +84,58 @@ export class ChartComponent implements OnInit, AfterViewInit {
             label: { text: 'Total', position: 'outer-bottom' },
           },
         },
-
-        // grid: {
-        //   y: {
-        //     show: true,
-        //   },
-        // },
+        grid: {
+          x: {
+            show: true,
+          },
+          y: {
+            show: true,
+          },
+        },
+        size: {
+          height: 500,
+        },
       });
-    }, 500);
+    });
+  }
+
+  ngAfterViewInit() {
+    // const chart = c3.generate({
+    //   bindto: '#chart',
+    //   padding: {
+    //     left: 100,
+    //   },
+    //   data: {
+    //     x: 'x',
+    //     columns: [
+    //       ['x', ...this.dataAge],
+    //       ['Total', ...this.dataTotal],
+    //     ],
+    //     onclick: (data: any) => {
+    //       const { index } = data;
+    //       const { age } = this.totalAge[index];
+    //       this._router.navigate(['users'], {
+    //         queryParams: { age: age },
+    //       });
+    //     },
+    //     type: 'bar',
+    //     labels: true,
+    //   },
+    //   axis: {
+    //     rotated: true,
+    //     x: {
+    //       type: 'category',
+    //       label: { text: 'Age', position: 'outer-right' },
+    //     },
+    //     y: {
+    //       label: { text: 'Total', position: 'outer-bottom' },
+    //     },
+    //   },
+    //   // grid: {
+    //   //   y: {
+    //   //     show: true,
+    //   //   },
+    //   // },
+    // });
   }
 }

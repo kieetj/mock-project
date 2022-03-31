@@ -23,7 +23,8 @@
     </ng-template>
 
     <span class="p-input-icon-left">
-      <i class="pi pi-search"></i>
+      <i *ngIf="!valueGlobalSearch" class="pi pi-search"></i>
+      <i *ngIf="valueGlobalSearch" class="pi pi-spin pi-spinner"></i>
       <input
         #globalSearch
         pInputText
@@ -169,6 +170,7 @@
             </th>
           </tr>
         </ng-template>
+        <p>Data not Found</p>
 
         <ng-template pTemplate="body" let-user>
           <tr [ngClass]="{ moreThan16: user.age > 15 }">
@@ -205,6 +207,7 @@
             </td>
           </tr>
         </ng-template>
+
         <ng-template pTemplate="summary">
           <div class="p-d-flex p-ai-center p-jc-between">
             In total there are {{ users ? users.length : 0 }} users.

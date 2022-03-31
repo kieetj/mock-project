@@ -1,24 +1,44 @@
 <div class="root">
+  <div class="root__left" [style.width]="collapseSideBar ? '4%' : '8%'">
+    <img
+      class="root__left-logo"
+      src="../assets/images/logo_fpt.png"
+      alt="logo"
+    />
 
-  <div class="root__left" [style.width]="collapseSideBar ? '3%' : '8%' ">
-
-    <img class="root__left-logo" src="../assets/images/logo_fpt.png" alt="logo">
-
-    <p routerLink="/chart" routerLinkActive="active_link" class="root__left-chart"><i class="pi pi-chart-bar"></i>
-      {{!collapseSideBar ? 'Chart':''}}
-
+    <p
+      routerLink="/chart"
+      routerLinkActive="active_link"
+      class="root__left-chart"
+    >
+      <i class="pi pi-chart-bar"></i>
+      {{ !collapseSideBar ? "Chart" : "" }}
     </p>
-    <p routerLink="/users" routerLinkActive="active_link" class="root__left-table"><i class="pi pi-table"></i>
-      {{!collapseSideBar ? 'Users':''}}
+    <p
+      routerLink="/users"
+      routerLinkActive="active_link"
+      class="root__left-table"
+    >
+      <i class="pi pi-table"></i>
+      {{ !collapseSideBar ? "Users" : "" }}
     </p>
 
-    <p *ngIf="collapseSideBar" (click)="openSideBar()" class="root__left-collapseBtn"><i
-        class="pi pi-arrow-circle-right"></i></p>
-    <p *ngIf="!collapseSideBar" (click)="closeSideBar()" class="root__left-collapseBtn"><i
-        class="pi pi-arrow-circle-left"></i></p>
+    <p
+      *ngIf="collapseSideBar"
+      (click)="openSideBar()"
+      class="root__left-collapseBtn"
+    >
+      <i class="pi pi-arrow-circle-right"></i>
+    </p>
+    <p
+      *ngIf="!collapseSideBar"
+      (click)="closeSideBar()"
+      class="root__left-collapseBtn"
+    >
+      <i class="pi pi-arrow-circle-left"></i>
+    </p>
   </div>
-  <div class="root__right ">
+  <div class="root__right">
     <router-outlet></router-outlet>
   </div>
-
 </div>

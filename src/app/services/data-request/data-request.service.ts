@@ -28,7 +28,11 @@ export class DataRequestService extends BaseService {
   }
 
   getAllUserByAge(age: any) {
-    return this.getDataParamAge<userData[]>(`users`, age);
+    return this.getDataParam<userData[]>(`users`, age);
+  }
+
+  getAllUserByName(name: any) {
+    return this.getDataParam<userData[]>(`users`, name);
   }
 
   getUserByID(id: number) {

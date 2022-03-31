@@ -83,19 +83,21 @@ export class TableComponent implements OnInit, AfterViewInit {
       .subscribe(() => {
         const searchValue = this.globalSearch.nativeElement.value;
 
+        this._router.navigate(['.'], {
+          relativeTo: this._activatedRoute,
+          queryParams: { search: searchValue },
+        });
+
         setTimeout(() => {
-          this._router.navigate(['.'], {
-            relativeTo: this._activatedRoute,
-            queryParams: { search: searchValue },
-          });
-          this._dataRequest
-            .globalSearch(searchValue)
-            .pipe(debounceTime(1000))
-            .subscribe((data: any) => {
-              this.users = data;
-            });
-        }, 300);
+          this.filterGlobalSearch();
+        }, 500);
       });
+
+    // this.fieldSearch(
+    //   this.globalSearch.nativeElement,
+    //   this.filterGlobalSearch(),
+    //   'seach'
+    // );
   }
 
   getUsers() {
@@ -104,18 +106,18 @@ export class TableComponent implements OnInit, AfterViewInit {
       .subscribe((data: any) => (this.users = data));
   }
 
-  getUsersPage() {
-    this._router.navigate(['.'], {
-      relativeTo: this._activatedRoute,
-      queryParams: { page: 2, limit: 5 },
-    });
-    this._activatedRoute.queryParams.subscribe((res: any) => {
-      this._dataRequest
-        .getAllUserPage(res)
-        .subscribe((data: any) => (this.users = data));
-    });
-  }
-
+  // getUsersPage() {
+  //   this._router.navigate(['.'], {
+  //     relativeTo: this._activatedRoute,
+  //     queryParams: { page: 2, limit: 5 },
+  //   });
+  //   this._activatedRoute.queryParams.subscribe((res: any) => {
+  //     this._dataRequest
+  //       .getAllUserPage(res)
+  //       .subscribe((data: any) => (this.users = data));
+  //   });
+  // }
+  //* filter table
   filterField($event: Event, field: string) {
     return this.dt1.filter(
       ($event.target as HTMLInputElement).value,
@@ -123,6 +125,55 @@ export class TableComponent implements OnInit, AfterViewInit {
       'contains'
     );
   }
+
+  filterGlobalSearch(): any {
+    this._activatedRoute.queryParams.subscribe((res) => {
+      if (res['search']) {
+        const searchKeyword = res['search'];
+
+        this._dataRequest
+          .globalSearch(searchKeyword)
+          .pipe(debounceTime(1000))
+          .subscribe((data: any) => {
+            this.users = data;
+          });
+      }
+      return;
+    });
+  }
+
+  filterSearch(field: string): any {
+    this._activatedRoute.queryParams.subscribe((res) => {
+      if (res[field]) {
+        const searchKeyword = res[field];
+
+        this._dataRequest
+          .globalSearch(searchKeyword)
+          .pipe(debounceTime(1000))
+          .subscribe((data: any) => {
+            this.users = data;
+          });
+      }
+      return;
+    });
+  }
+
+  // fieldSearch(inputNativeEle: any, funcSearch: () => any, field: any) {
+  //   fromEvent(inputNativeEle, 'keyup')
+  //     .pipe(debounceTime(1000), distinctUntilChanged())
+  //     .subscribe(() => {
+  //       const queryParams = inputNativeEle.value;
+
+  //       this._router.navigate(['.'], {
+  //         relativeTo: this._activatedRoute,
+  //         queryParams: { [field]: queryParams },
+  //       });
+
+  //       setTimeout(() => {
+  //         funcSearch();
+  //       }, 500);
+  //     });
+  // }
 
   //* Notification for Modal
 

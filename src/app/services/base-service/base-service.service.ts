@@ -28,9 +28,9 @@ export class BaseService {
     return this._http.get<T>(`${this.BASE_URL}/${endUrl}`, { params: params });
   }
 
-  getDataParamAge<T>(endUrl: string, age: any) {
+  getDataParam<T>(endUrl: string, age: any) {
     let params = new HttpParams();
-    params = params.append('age', age);
+    params = params.append(`${age}`, age);
     return this._http.get<T>(`${this.BASE_URL}/${endUrl}`, { params: params });
   }
 
